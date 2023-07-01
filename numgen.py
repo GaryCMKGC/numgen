@@ -200,7 +200,7 @@ def reduce_number(num):
         num = sum(int(digit) for digit in str(num))
     return num
 
-def life_path_number(birthdate: str) -> int:
+def calculate_life_path_number(birthdate: str) -> int:
     # Split the birthdate string into separate parts (month, day, year)
     numbers = birthdate.split()
 
