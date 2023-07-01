@@ -200,20 +200,24 @@ def reduce_number(num):
         num = sum(int(digit) for digit in str(num))
     return num
 
-def calculate_life_path_number(dob):
-    month, day, year = map(int, dob.split())
-    reduced_month = reduce_number(month)
-    reduced_day = reduce_number(day)
-    reduced_year = reduce_number(year)
+def life_path_number(birthdate: str) -> int:
+    # Split the birthdate string into separate parts (month, day, year)
+    numbers = birthdate.split()
 
-    if reduced_month not in [11, 22, 33]:
-        reduced_month = reduce_number(reduced_month)
-    if reduced_day not in [11, 22, 33]:
-        reduced_day = reduce_number(reduced_day)
-    if reduced_year not in [11, 22, 33]:
-        reduced_year = reduce_number(reduced_year)
+    # Convert each part into a list of digits
+    digits = [list(map(int, str(number))) for number in numbers]
 
-    return reduce_number(reduced_month + reduced_day + reduced_year)
+    # Flatten the list of lists into a single list of digits
+    flattened_digits = [digit for sublist in digits for digit in sublist]
+
+    # Add up all the digits
+    total = sum(flattened_digits)
+
+    # If the total is a two-digit number, split the digits and add them together until a single digit is obtained
+    while total > 9:
+        total = sum(map(int, str(total)))
+
+    return total
 
 def calculate_expression_number(full_name):
     letter_values = {char: idx for idx, char in enumerate('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 1)}
