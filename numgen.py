@@ -17,10 +17,12 @@ def main_menu():
         print("3. Delete Entry")
         print("4. Numerology Categories")
         print("5. Chinese Zodiac")
-        print("6. Exit")
+        print("6. Number Reference Guide")
+        print("7. Basic Calculation")  # New option for Basic Calculation
+        print("8. Exit")
 
         try:
-            choice = int(input("Enter your choice (1-6): "))
+            choice = int(input("Enter your choice (1-8): "))
 
             if choice == 1:
                 new_calculation()
@@ -34,14 +36,148 @@ def main_menu():
             elif choice == 5:
                 show_chinese_zodiac()
             elif choice == 6:
+                display_number_menu()
+            elif choice == 7:
+                basic_calculation()  # Call the basic calculation function
+            elif choice == 8:
                 print("Goodbye!")
                 sys.exit(0)
             else:
                 print("Invalid choice. Please try again.")
                 time.sleep(1)
         except ValueError:
-            print("Invalid input. Please enter a number between 1 and 6.")
+            print("Invalid input. Please enter a number between 1 and 8.")
             time.sleep(1)
+
+def basic_calculation():
+    while True:
+        text = input("Enter a text for basic calculation: ")
+        total = calculate_gematria_total(text)
+        print(f"The Gematria total for '{text}' is: {total}")
+
+        choice = input("Enter '1' to calculate another Gematria total or '2' to return to the main menu: ")
+        if choice == '1':
+            continue  # Continue the loop to calculate another Gematria total
+        elif choice == '2':
+            print("Returning to the main menu...")
+            break  # Exit the loop and return to the main menu
+        else:
+            print("Invalid choice. Please try again.")
+
+def calculate_gematria_total(text):
+    cipher = {
+        'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7, 'H': 8, 'I': 9,
+        'J': 1, 'K': 2, 'L': 3, 'M': 4, 'N': 5, 'O': 6, 'P': 7, 'Q': 8, 'R': 9,
+        'S': 1, 'T': 2, 'U': 3, 'V': 4, 'W': 5, 'X': 6, 'Y': 7, 'Z': 8
+    }
+    total = 0
+    for letter in text.upper():
+        if letter in cipher:
+            total += cipher[letter]
+    return total
+
+def display_number_menu():
+    print("Numerology Number Reference Guide")
+    print("1. Display Number Meaning")
+    print("2. Exit")
+
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        while True:
+            number = input("Enter a numerology number (1-9, 11, 22, 33): ")
+            if number.isdigit():
+                number = int(number)
+                display_number_meaning(number)
+                break
+            else:
+                print("Invalid input. Please enter a valid numerology number.")
+
+        print("1. Check Another Number")
+        print("2. Return to Main Menu")
+        option = input("Enter your choice: ")
+
+        if option == "1":
+            display_number_menu()
+        elif option == "2":
+            print("Returning to the main menu...")
+        else:
+            print("Invalid choice. Returning to the main menu...")
+
+    elif choice == "2":
+        print("Exiting...")
+        # Add any necessary exit code or return statement here
+    else:
+        print("Invalid choice. Please try again.")
+        display_number_menu()
+
+def display_number_meaning(number):
+    aspects = {
+        1: {
+            'positive': ['Active', 'Ambitious', 'Confident', 'Doer', 'Individual', 'Inventive', 'Leader', 'Thinker'],
+            'negative': ['Aggressive', 'Lazy', 'Self-conscious', 'Selfish', 'Stubborn'],
+            'destructive': ['Bully', 'Antagonistic', 'Bigot', 'Egotistical', 'Puts self first at all times']
+        },
+        2: {
+            'positive': ['Cooperative', 'Friendly', 'Helpful', 'Modest', 'Neat', 'Tact and diplomacy'],
+            'negative': ['Easily hurt', 'Indecisive', 'Insecure', 'Over-emotional', 'Subservient', 'Timid'],
+            'destructive': ['Bad temper', 'Cruel', 'Deceptive', 'Lacks self-control', 'Liar', 'Sneaky', 'Sly']
+        },
+        3: {
+            'positive': ['Cheerful', 'Humor', 'The Entertainer', 'Enthusiastic', 'Good at writing, speaking, singing'],
+            'negative': ['Bored', 'Dislikes responsibility', 'Impulsive', 'Moody', 'Vain', 'Wasteful'],
+            'destructive': ['Gossip', 'Greed', 'Hatred', 'Intolerant', 'Jealous', 'Pedophile']
+        },
+        4: {
+            'positive': ['Disciplined', 'Family lover', 'Good worker', 'Honest', 'Organized', 'Patient', 'Patriotic', 'Practical', 'Reliable'],
+            'negative': ['Argumentative', 'Dry', 'Humorless', 'Narrow-minded', 'Opinionated', 'Stern', 'Workaholic'],
+            'destructive': ['Animalism', 'Crude', 'Hatred', 'Jealous', 'Violent', 'Vulgar']
+        },
+        5: {
+            'positive': ['Adaptable', 'Adventurous', 'Brave', 'Charming', 'Clever', 'Freedom', 'Social', 'Super salesman', 'Witty'],
+            'negative': ['Impatient', 'Irresponsible', 'Restless', 'Thoughtless'],
+            'destructive': ['Debauchery: drugs, food, drink, etc.', 'Dissipation', 'Gambler', 'Perversion', 'Self-indulgent']
+        },
+        6: {
+            'positive': ['Artistic', 'Domestic', 'Humanitarian', 'Musical', 'Nurturer', 'Responsible', 'Serves', 'Teacher'],
+            'negative': ['Argues', 'Meddlesome', 'Mopes', 'Needs appreciation', 'Self-righteous', 'Smug', 'Sweet tooth'],
+            'destructive': ['Conceit', 'Domestic or sexual tyranny', 'Drudgery', 'Nosy and Interfering', 'Slavery']
+        },
+        7: {
+            'positive': ['Dignified', 'Educator', 'Intuitive', 'Love of nature', 'Silent', 'Spiritual or Scientific', 'Studious'],
+            'negative': ['Aloof', 'Cold', 'Lives in the past', 'Melancholy', 'Peculiar', 'Skeptical', 'Sly', 'Unapproachable'],
+            'destructive': ['Cheat', 'Dishonest', 'Faithless', 'Gossip', 'Sarcastic', 'Evil intent', 'Secret motives']
+        },
+        8: {
+            'positive': ['Ambitious', 'Athletic', 'Balance of energies', 'Efficient', 'Executive ability', 'Good judgement', 'Stamina'],
+            'negative': ['Impatient', 'Materialistic', 'Needs philosophic study', 'Not frugal', 'Pushy', 'Thoughtless'],
+            'destructive': ['Abusive', 'Cruel', 'Ignorant', 'Intolerant', 'Revengeful', 'Schemer', 'Temper', 'Uncultured']
+        },
+        9: {
+            'positive': ['Artistic abilities', 'Brotherly love', 'Compassionate', 'Dramatic', 'Philanthropic', 'Unselfish'],
+            'negative': ['Aimless', 'Burdened', 'Frustrated', 'Over-emotional', 'Unfulfilled'],
+            'destructive': ['Bad habits', 'Bitter', 'Dissipates', 'Immoral', 'Liar', 'Morose', 'Possessive', 'Vulgar']
+        },
+        11: {
+            'positive': ['Great artist: music, art, drama', 'Idealist', 'Inspired', 'Inventive', 'Religious leader'],
+            'negative': ['Aimless', 'Fanatical', 'Frustrated', 'Sets goals too high to reach'],
+            'destructive': ['Dishonest', 'Miserly', 'Wicked leader']
+        },
+        22: {
+            'positive': ['Good at details', 'Master achiever', 'Powerful'],
+            'negative': ['Disapproval', 'Inferiority complex', 'Narrow'],
+            'destructive': ['Uncultured', 'Black magic', 'Gang leader', 'Reckless', 'Wicked', 'Ulterior motives']
+        }
+    }
+
+    if number in aspects:
+        print(f"The number {number} signifies:")
+        print("Positive Aspects:", ', '.join(aspects[number]['positive']))
+        print("Negative Aspects:", ', '.join(aspects[number]['negative']))
+        print("Destructive Aspects:", ', '.join(aspects[number]['destructive']))
+    else:
+        print("Invalid number. Please enter a valid numerology number.")
+
 
 def show_numerology_categories():
     while True:
@@ -59,39 +195,67 @@ def show_numerology_categories():
         print("11. Major Life Cycle Number")
         print("0. Return to Main Menu")
 
-        user_choice = int(input("\nEnter the number of the category you want to learn about, or '0' to return to the main menu: "))
+        user_choice = int(
+            input(
+                "\nEnter the number of the category you want to learn about, or '0' to return to the main menu: "
+            )
+        )
 
         if user_choice == 0:
             break
         elif user_choice == 1:
-            print("\nLife Path Number: The date of birth components (month, day, and year) are reduced to single digits and summed up. The resulting number is then reduced to a single digit or a master number (11, 22, or 33).")
+            print(
+                "\nLife Path Number: The date of birth components (month, day, and year) are reduced to single digits and summed up. The resulting number is then reduced to a single digit or a master number (11, 22, or 33)."
+            )
         elif user_choice == 2:
-            print("\nExpression Number: Each letter of the full name is assigned a numerical value based on its position in the alphabet. The numbers are then added together and reduced to a single digit or master number.")
+            print(
+                "\nExpression Number: Each letter of the full name is assigned a numerical value based on its position in the alphabet. The numbers are then added together and reduced to a single digit or master number."
+            )
         elif user_choice == 3:
-            print("\nSoul Urge Number: The numerical values of the vowels in the full name are added together and reduced to a single digit or master number.")
+            print(
+                "\nSoul Urge Number: The numerical values of the vowels in the full name are added together and reduced to a single digit or master number."
+            )
         elif user_choice == 4:
-            print("\nPersonality Number: The numerical values of the consonants in the full name are added together and reduced to a single digit or master number.")
+            print(
+                "\nPersonality Number: The numerical values of the consonants in the full name are added together and reduced to a single digit or master number."
+            )
         elif user_choice == 5:
-            print("\nBirthday Number: The day of birth is reduced to a single digit or master number.")
+            print(
+                "\nBirthday Number: The day of birth is reduced to a single digit or master number."
+            )
         elif user_choice == 6:
-            print("\nPersonal Year Number: The current year's digits are added to the Life Path Number, and the sum is reduced to a single digit.")
+            print(
+                "\nPersonal Year Number: The current year's digits are added to the Life Path Number, and the sum is reduced to a single digit."
+            )
         elif user_choice == 7:
-            print("\nPersonal Month Number: The current month's digits are added to the Personal Year Number, and the sum is reduced to a single digit.")
+            print(
+                "\nPersonal Month Number: The current month's digits are added to the Personal Year Number, and the sum is reduced to a single digit."
+            )
         elif user_choice == 8:
-            print("\nPersonal Day Number: The current day's digits are added to the Personal Month Number, and the sum is reduced to a single digit.")
+            print(
+                "\nPersonal Day Number: The current day's digits are added to the Personal Month Number, and the sum is reduced to a single digit."
+            )
         elif user_choice == 9:
-            print("\nLife Cycle Number: Derived from the Life Path Number, this calculation reveals three major periods in one's life, each with its own unique challenges and opportunities.")
+            print(
+                "\nLife Cycle Number: Derived from the Life Path Number, this calculation reveals three major periods in one's life, each with its own unique challenges and opportunities."
+            )
         elif user_choice == 10:
-            print("\nPinnacle Cycle Number: Also derived from the Life Path Number, this calculation shows four specific time periods in one's life, representing the challenges and opportunities they will face.")
+            print(
+                "\nPinnacle Cycle Number: Also derived from the Life Path Number, this calculation shows four specific time periods in one's life, representing the challenges and opportunities they will face."
+            )
         elif user_choice == 11:
-            print("\nMajor Life Cycle Number: Similar to the Life Cycle and Pinnacle Cycle Numbers, this calculation identifies three major phases in one's life, each with its own set of experiences and challenges.")
+            print(
+                "\nMajor Life Cycle Number: Similar to the Life Cycle and Pinnacle Cycle Numbers, this calculation identifies three major phases in one's life, each with its own set of experiences and challenges."
+            )
         else:
             print("\nInvalid selection. Please try again.")
 
         input("\nPress Enter to continue...")
 
+
 def clear_screen():
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system("cls" if os.name == "nt" else "clear")
+
 
 def get_personality_traits(life_path_number):
     if life_path_number == 8:
@@ -106,6 +270,7 @@ def get_personality_traits(life_path_number):
             "Balancing power and compassion: 8 Life Path individuals may need to work on balancing their powerful, assertive nature with compassion and empathy. This balance can help them be more effective leaders and partners in their personal and professional lives.",
         ]
     # You can add more cases for other Life Path numbers later
+
 
 def display_current_date_numbers():
     numerology_explanations = {
@@ -126,30 +291,48 @@ def display_current_date_numbers():
     current_month_number = reduce_number(today.month)
     current_year_number = reduce_number(today.year)
 
-    current_date_number = reduce_number(current_day_number + current_month_number + current_year_number)
+    current_date_number = reduce_number(
+        current_day_number + current_month_number + current_year_number
+    )
 
     print(f"Current Day Number: {current_day_number}")
     print(f"Current Month Number: {current_month_number}")
     print(f"Current Year Number: {current_year_number}")
     print(f"Numerological Value of the Current Date: {current_date_number}")
+
+
 ##    print(numerology_explanations[current_date_number] + "\n")
 
+
 def show_chinese_zodiac():
-    zodiac = ['Rat', 'Ox', 'Tiger', 'Rabbit', 'Dragon', 'Snake', 'Horse', 'Sheep', 'Monkey', 'Rooster', 'Dog', 'Pig']
+    zodiac = [
+        "Rat",
+        "Ox",
+        "Tiger",
+        "Rabbit",
+        "Dragon",
+        "Snake",
+        "Horse",
+        "Sheep",
+        "Monkey",
+        "Rooster",
+        "Dog",
+        "Pig",
+    ]
 
     descriptions = {
-        'Rat': 'Rats are quick-witted, resourceful, and versatile.',
-        'Ox': 'Oxen are diligent, dependable, strong and determined.',
-        'Tiger': 'Tigers are brave, competitive, unpredictable, and confident.',
-        'Rabbit': 'Rabbits are gentle, quiet, elegant and alert; quick, skillful, kind and patient.',
-        'Dragon': 'Dragons are confident, intelligent, enthusiastic and hardworking.',
-        'Snake': 'Snakes are intelligent, hardworking, reliable and meticulous.',
-        'Horse': 'Horses are warm-hearted, enthusiastic, and positive.',
-        'Sheep': 'Sheep are gentle, calm, mothering, and kind. They love peace and quiet and are sympathetic to others\' needs.',
-        'Monkey': 'Monkeys are witty, intelligent, and have a magnetic personality.',
-        'Rooster': 'Roosters are honest, bright, communicative, and ambitious.',
-        'Dog': 'Dogs are loyal, honest, and trustworthy and have a strong sense of duty.',
-        'Pig': 'Pigs are diligent, compassionate, and generous. They have great concentration: once they set a goal, they will devote all their energy to achieving it.'
+        "Rat": "Rats are quick-witted, resourceful, and versatile.",
+        "Ox": "Oxen are diligent, dependable, strong and determined.",
+        "Tiger": "Tigers are brave, competitive, unpredictable, and confident.",
+        "Rabbit": "Rabbits are gentle, quiet, elegant and alert; quick, skillful, kind and patient.",
+        "Dragon": "Dragons are confident, intelligent, enthusiastic and hardworking.",
+        "Snake": "Snakes are intelligent, hardworking, reliable and meticulous.",
+        "Horse": "Horses are warm-hearted, enthusiastic, and positive.",
+        "Sheep": "Sheep are gentle, calm, mothering, and kind. They love peace and quiet and are sympathetic to others' needs.",
+        "Monkey": "Monkeys are witty, intelligent, and have a magnetic personality.",
+        "Rooster": "Roosters are honest, bright, communicative, and ambitious.",
+        "Dog": "Dogs are loyal, honest, and trustworthy and have a strong sense of duty.",
+        "Pig": "Pigs are diligent, compassionate, and generous. They have great concentration: once they set a goal, they will devote all their energy to achieving it.",
     }
 
     while True:
@@ -158,7 +341,7 @@ def show_chinese_zodiac():
         print("Enter '3' to return to the main menu")
         user_choice = input("Enter your choice: ")
 
-        if user_choice == '1':
+        if user_choice == "1":
             while True:
                 try:
                     birth_year = int(input("Please enter your birth year: "))
@@ -172,16 +355,20 @@ def show_chinese_zodiac():
             sign = zodiac[(birth_year - 1900) % 12]
             print(f"Your Chinese Zodiac sign is: {sign}")
             print(descriptions[sign])  # Prints the description of the sign
-        elif user_choice == '2':
+        elif user_choice == "2":
             for index, sign in enumerate(zodiac):
-                print(f"{sign}: {', '.join(str(year) for year in range(1900 + index, 2101, 12))}")
-        elif user_choice == '3':
+                print(
+                    f"{sign}: {', '.join(str(year) for year in range(1900 + index, 2101, 12))}"
+                )
+        elif user_choice == "3":
             return
         else:
             print("Invalid choice. Please try again.")
 
+
 def get_full_name():
     return input("Please enter your full name at birth: ")
+
 
 def get_date_of_birth():
     while True:
@@ -194,6 +381,7 @@ def get_date_of_birth():
                 raise ValueError
         except ValueError:
             print("Invalid date format. Please try again.")
+
 
 def reduce_number(num):
     while num >= 10 and num not in [11, 22, 33]:
@@ -220,32 +408,45 @@ def calculate_life_path_number(birthdate: str) -> int:
     return total
 
 def calculate_expression_number(full_name):
-    letter_values = {char: idx for idx, char in enumerate('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 1)}
+    letter_values = {
+        char: idx for idx, char in enumerate("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 1)
+    }
     full_name = full_name.upper().replace(" ", "")
 
     name_value = sum(letter_values[char] for char in full_name)
     return reduce_number(name_value)
 
+
 def calculate_soul_urge_number(full_name):
-    letter_values = {char: idx for idx, char in enumerate('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 1)}
+    letter_values = {
+        char: idx for idx, char in enumerate("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 1)
+    }
     full_name = full_name.upper().replace(" ", "")
 
     vowel_value = sum(letter_values[char] for char in full_name if char in "AEIOU")
     return reduce_number(vowel_value)
 
+
 def calculate_birth_day_number(dob):
     _, day, _ = map(int, dob.split())
     return reduce_number(day)
 
+
 def calculate_personality_number(full_name):
-    letter_values = {char: idx for idx, char in enumerate('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 1)}
+    letter_values = {
+        char: idx for idx, char in enumerate("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 1)
+    }
     full_name = full_name.upper().replace(" ", "")
 
-    consonant_value = sum(letter_values[char] for char in full_name if char not in "AEIOU")
+    consonant_value = sum(
+        letter_values[char] for char in full_name if char not in "AEIOU"
+    )
     return reduce_number(consonant_value)
+
 
 def calculate_maturity_number(life_path_number, expression_number):
     return reduce_number(life_path_number + expression_number)
+
 
 def calculate_karmic_debt_number(dob):
     month, day, year = map(int, dob.split())
@@ -260,8 +461,11 @@ def calculate_karmic_debt_number(dob):
         else None
     )
 
+
 def calculate_hidden_passion_number(full_name):
-    letter_values = {char: idx for idx, char in enumerate('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 1)}
+    letter_values = {
+        char: idx for idx, char in enumerate("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 1)
+    }
     full_name = full_name.upper().replace(" ", "")
 
     letter_count = {char: full_name.count(char) for char in set(full_name)}
@@ -275,12 +479,30 @@ def calculate_hidden_passion_number(full_name):
         )
     )
 
+
 def calculate_subconscious_self_number(dob):
     date_numbers = [int(char) for char in dob if char.isdigit()]
     digit_count = {digit: date_numbers.count(digit) for digit in range(1, 10)}
     return sum(1 for count in digit_count.values() if count > 0)
 
-def save_calculation(full_name, dob, life_path_number, expression_number, soul_urge_number, birth_day_number, personality_number, maturity_number, karmic_debt_number, hidden_passion_number, personal_year_number, personal_month_number, personal_day_number, subconscious_self_number, major_life_cycle_number):
+
+def save_calculation(
+    full_name,
+    dob,
+    life_path_number,
+    expression_number,
+    soul_urge_number,
+    birth_day_number,
+    personality_number,
+    maturity_number,
+    karmic_debt_number,
+    hidden_passion_number,
+    personal_year_number,
+    personal_month_number,
+    personal_day_number,
+    subconscious_self_number,
+    major_life_cycle_number,
+):
     calculation = {
         "full_name": full_name,
         "dob": dob,
@@ -306,13 +528,17 @@ def save_calculation(full_name, dob, life_path_number, expression_number, soul_u
         saved_calculations = []
 
     # Check if the calculation is already saved
-    if any(saved_calc["full_name"] == full_name and saved_calc["dob"] == dob for saved_calc in saved_calculations):
+    if any(
+        saved_calc["full_name"] == full_name and saved_calc["dob"] == dob
+        for saved_calc in saved_calculations
+    ):
         print("This calculation has already been saved.")
     else:
         saved_calculations.append(calculation)
 
         with open("saved_calculations.json", "w") as file:
             json.dump(saved_calculations, file, indent=4)
+
 
 def view_saved_calculation():
     try:
@@ -334,47 +560,84 @@ def view_saved_calculation():
     time.sleep(5)  # Add a 5-second delay before returning to the main menu
     main_menu()
 
+
 def display_traits_or_exit(calculation):
     while True:
-        choice = input("\n1. View Personality Traits\n2. Exit\nEnter your choice (1-2): ")
+        choice = input(
+            "\n1. View Personality Traits\n2. Exit\nEnter your choice (1-2): "
+        )
 
-        if choice == '1':
+        if choice == "1":
             if calculation["life_path_number"] == 8:
                 print("\nPersonality Traits for Life Path Number 8:")
                 for trait in get_personality_traits(8):
                     print("-", trait)
             else:
                 print("Personality traits are only available for Life Path Number 8.")
-        elif choice == '2':
+        elif choice == "2":
             break
         else:
             print("Invalid input. Please enter a valid choice (1-2).")
 
-
 def display_calculation(calculation):
+    BLUE = '\033[34m'  # ANSI escape sequence for blue color
+    RESET = '\033[0m'  # ANSI escape sequence to reset text color
+
     print("Full Name:", calculation["full_name"])
     print("Date of Birth:", calculation["dob"])
-    print("Life Path Number:", calculation["life_path_number"])
-    print("Expression Number:", calculation["expression_number"])
-    print("Soul Urge Number:", calculation["soul_urge_number"])
-    print("Birth Day Number:", calculation["birth_day_number"])
-    print("Personality Number:", calculation["personality_number"])
-    print("Maturity Number:", calculation["maturity_number"])
-    if "karmic_debt_number" in calculation and calculation["karmic_debt_number"]:
-        print("Karmic Debt Number:", calculation["karmic_debt_number"])
+    print(BLUE + "Life Path Number:", str(calculation["life_path_number"]))
+    print("Number Classification:", calculate_number_classification(calculation["life_path_number"]))
+    print(BLUE + "Expression Number:", str(calculation["expression_number"]))
+    print("Number Classification:", calculate_number_classification(calculation["expression_number"]))
+    print(BLUE + "Soul Urge Number:", str(calculation["soul_urge_number"]))
+    print("Number Classification:", calculate_number_classification(calculation["soul_urge_number"]))
+    print(BLUE + "Birth Day Number:", str(calculation["birth_day_number"]))
+    print("Number Classification:", calculate_number_classification(calculation["birth_day_number"]))
+    print(BLUE + "Personality Number:", str(calculation["personality_number"]))
+    print("Number Classification:", calculate_number_classification(calculation["personality_number"]))
+    print(BLUE + "Maturity Number:", str(calculation["maturity_number"]))
+    print("Number Classification:", calculate_number_classification(calculation["maturity_number"]))
+    if "karmic_debt_number" in calculation and calculation["karmic_debt_number"] is not None:
+        print(BLUE + "Karmic Debt Number:", str(calculation["karmic_debt_number"]))
+        print("Number Classification:", calculate_number_classification(calculation["karmic_debt_number"]))
     else:
-        print("Karmic Debt Number: None")
+        print(BLUE + "Karmic Debt Number: None" + RESET)
     if "hidden_passion_number" in calculation:
-        print("Hidden Passion Number:", calculation["hidden_passion_number"])
+        print(BLUE + "Hidden Passion Number:", str(calculation["hidden_passion_number"]))
+        print("Number Classification:", calculate_number_classification(calculation["hidden_passion_number"]))
     else:
-        print("Hidden Passion Number: Not available")
-    print("Personal Year Number:", calculation["personal_year_number"])
-    print("Personal Month Number:", calculation["personal_month_number"])
-    print("Personal Day Number:", calculation["personal_day_number"])
-    print("Subconscious Self Number:", calculation["subconscious_self_number"])
-    print("Major Life Cycle Number:", calculation["major_life_cycle_number"])
+        print(BLUE + "Hidden Passion Number: Not available" + RESET)
+    print(BLUE + "Personal Year Number:", str(calculation["personal_year_number"]))
+    print("Number Classification:", calculate_number_classification(calculation["personal_year_number"]))
+    print(BLUE + "Personal Month Number:", str(calculation["personal_month_number"]))
+    print("Number Classification:", calculate_number_classification(calculation["personal_month_number"]))
+    print(BLUE + "Personal Day Number:", str(calculation["personal_day_number"]))
+    print("Number Classification:", calculate_number_classification(calculation["personal_day_number"]))
+    print(BLUE + "Subconscious Self Number:", str(calculation["subconscious_self_number"]))
+    print("Number Classification:", calculate_number_classification(calculation["subconscious_self_number"]))
+    print(BLUE + "Major Life Cycle Number:", str(calculation["major_life_cycle_number"]))
+    print("Number Classification:", calculate_number_classification(calculation["major_life_cycle_number"]))
 
     display_traits_or_exit(calculation)
+
+def calculate_number_classification(n):
+    # Calculate the sum of the proper divisors of n
+    divisor_sum = sum(i for i in range(1, n) if n % i == 0)
+
+    # Classify the number
+    if n % 2 == 0:
+        parity = 'Even'
+    else:
+        parity = 'Odd'
+
+    if divisor_sum < n:
+        abundance = 'Deficient'
+    elif divisor_sum > n:
+        abundance = 'Superabundant'
+    else:
+        abundance = 'Perfect'
+
+    return parity, abundance
 
 def delete_saved_calculation(entry_number):
     try:
@@ -398,9 +661,12 @@ def delete_saved_calculation(entry_number):
     time.sleep(2)
     main_menu()
 
+
 def new_calculation():
     while True:
-        full_name = input("Please enter your full name at birth (0 to return to the main menu): ")
+        full_name = input(
+            "Please enter your full name at birth (0 to return to the main menu): "
+        )
         if full_name == "0":
             break
         dob = input("Please enter your date of birth (mm dd yyyy): ")
@@ -418,33 +684,50 @@ def new_calculation():
         subconscious_self_number = calculate_subconscious_self_number(dob)
         major_life_cycle_number = calculate_major_life_cycle_number(dob)
 
-        display_calculation({
-            "full_name": full_name,
-            "dob": dob,
-            "life_path_number": life_path_number,
-            "expression_number": expression_number,
-            "soul_urge_number": soul_urge_number,
-            "birth_day_number": birth_day_number,
-            "personality_number": personality_number,
-            "maturity_number": maturity_number,
-            "karmic_debt_number": karmic_debt_number,
-            "hidden_passion_number": hidden_passion_number,
-            "personal_year_number": personal_year_number,
-            "personal_month_number": personal_month_number,
-            "personal_day_number": personal_day_number,
-            "subconscious_self_number": subconscious_self_number,
-            "major_life_cycle_number": major_life_cycle_number
-        })
-        save_calculation(full_name, dob, life_path_number, expression_number, soul_urge_number, birth_day_number,
-                         personality_number, maturity_number, karmic_debt_number, hidden_passion_number,
-                         personal_year_number, personal_month_number, personal_day_number, subconscious_self_number,
-                         major_life_cycle_number)
+        display_calculation(
+            {
+                "full_name": full_name,
+                "dob": dob,
+                "life_path_number": life_path_number,
+                "expression_number": expression_number,
+                "soul_urge_number": soul_urge_number,
+                "birth_day_number": birth_day_number,
+                "personality_number": personality_number,
+                "maturity_number": maturity_number,
+                "karmic_debt_number": karmic_debt_number,
+                "hidden_passion_number": hidden_passion_number,
+                "personal_year_number": personal_year_number,
+                "personal_month_number": personal_month_number,
+                "personal_day_number": personal_day_number,
+                "subconscious_self_number": subconscious_self_number,
+                "major_life_cycle_number": major_life_cycle_number,
+            }
+        )
+        save_calculation(
+            full_name,
+            dob,
+            life_path_number,
+            expression_number,
+            soul_urge_number,
+            birth_day_number,
+            personality_number,
+            maturity_number,
+            karmic_debt_number,
+            hidden_passion_number,
+            personal_year_number,
+            personal_month_number,
+            personal_day_number,
+            subconscious_self_number,
+            major_life_cycle_number,
+        )
 
     main_menu()
+
 
 def get_current_date():
     current_date = datetime.now()
     return current_date.month, current_date.day, current_date.year
+
 
 def calculate_personal_year_number(dob):
     month, day, _ = map(int, dob.split())
@@ -456,6 +739,7 @@ def calculate_personal_year_number(dob):
 
     return reduce_number(reduced_month + reduced_day + reduced_year)
 
+
 def calculate_personal_month_number(dob):
     personal_year_number = calculate_personal_year_number(dob)
 
@@ -463,6 +747,7 @@ def calculate_personal_month_number(dob):
     reduced_month = reduce_number(current_month)
 
     return reduce_number(personal_year_number + reduced_month)
+
 
 def calculate_personal_day_number(dob):
     personal_month_number = calculate_personal_month_number(dob)
@@ -472,6 +757,7 @@ def calculate_personal_day_number(dob):
 
     return reduce_number(personal_month_number + reduced_day)
 
+
 def calculate_major_life_cycle_number(dob):
     month, day, year = map(int, dob.split())
     birth_date = datetime(year, month, day)
@@ -479,6 +765,7 @@ def calculate_major_life_cycle_number(dob):
     age_in_days = (current_date - birth_date.date()).days
 
     return reduce_number(age_in_days)
+
 
 if __name__ == "__main__":
     main_menu()
